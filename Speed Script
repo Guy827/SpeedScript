@@ -1,0 +1,74 @@
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui") -- Correct location for UI
+
+
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+
+
+local Type
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = playerGui -- ✅ Place UI in PlayerGui, NOT StarterGui
+ScreenGui.Name = "ShopGUI"
+
+local Shop = Instance.new("Frame")
+Shop.Parent = ScreenGui
+Shop.Name = "Shop"
+Shop.Size = UDim2.new(0, 135, 0, 176)
+Shop.Position = UDim2.new(0.122, 0, 0.166, 0)
+Shop.BackgroundColor3 = Color3.new(0, 0, 0)
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Execute"
+TextButton.Parent = Shop
+TextButton.Size = UDim2.new(0, 113, 0, 31)
+TextButton.Position = UDim2.new(0.105, 0, 0.6, 0)
+TextButton.Font = Enum.Font.LuckiestGuy
+TextButton.TextSize = 18
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+
+local CornerForExecute = Instance.new("UICorner")
+CornerForExecute.Parent = TextButton
+CornerForExecute.CornerRadius = UDim.new(0, 20) -- ✅ Corrected to UDim.new()
+
+
+local TextBox = Instance.new("TextBox")
+TextBox.Text = "Put Number"
+TextBox.Parent = Shop
+TextBox.Size = UDim2.new(0, 113, 0, 31)
+TextBox.Position = UDim2.new(0.105, 0, 0.3, 0)
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.Font = Enum.Font.LuckiestGuy
+
+
+local SpeedText = Instance.new("TextLabel")
+SpeedText.Parent = Shop
+SpeedText.Position = UDim2.new(0.5,0,0.1,0)
+SpeedText.Font = Enum.Font.LuckiestGuy
+SpeedText.TextColor3 = Color3.new(1, 1, 1)
+SpeedText.Text = "SPEED"
+SpeedText.TextSize = 20
+
+local CornerForTextbox = Instance.new("UICorner")
+CornerForTextbox.Parent = TextBox
+CornerForTextbox.CornerRadius = UDim.new(20,20)
+
+
+
+TextButton.MouseButton1Click:Connect(function()
+	Type = tonumber(TextBox.Text)
+	print(Type)
+	
+	humanoid.WalkSpeed = Type
+end)
+
+local UiStroke = Instance.new("UIStroke")
+UiStroke.Parent = Shop
+UiStroke.Name = "UIStroke"
+UiStroke.Color = Color3.new(1, 1, 1)
+UiStroke.Thickness = 2
+
+local UiCorner = Instance.new("UICorner")
+UiCorner.Parent = Shop
+UiCorner.CornerRadius = UDim.new(0, 20) -- ✅ UDim should have (0, 20)
