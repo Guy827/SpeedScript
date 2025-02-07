@@ -1,6 +1,8 @@
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui") -- Correct location for UI
 
+local Open = true
+
 
 local char = player.Character or player.CharacterAdded:Wait()
 local humanoid = char:WaitForChild("Humanoid")
@@ -9,7 +11,7 @@ local humanoid = char:WaitForChild("Humanoid")
 local Type
 
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = playerGui -- ✅ Place UI in PlayerGui, NOT StarterGui
+ScreenGui.Parent = playerGui
 ScreenGui.Name = "ShopGUI"
 
 local Shop = Instance.new("Frame")
@@ -19,6 +21,35 @@ Shop.Size = UDim2.new(0, 135, 0, 176)
 Shop.Position = UDim2.new(0.122, 0, 0.166, 0)
 Shop.BackgroundColor3 = Color3.new(0, 0, 0)
 
+local Frame = Instance.new("Frame")
+Frame.Parent = ScreenGui
+Frame.Position = UDim2.new(0.122, 0,0.074, 0)
+Frame.Size = UDim2.new(0, 135,0, 53)
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+
+
+local X = Instance.new("ImageButton")
+X.Parent = Frame
+X.Name = "ExitButton"
+X.Image = "rbxassetid://80811143418939"
+X.BackgroundTransparency = 1
+X.Size = UDim2.new(0, 18,0, 19)
+X.Position = UDim2.new(0.803, 0,0.028, 0)
+
+local V = Instance.new("ImageButton")
+V.Parent = Frame
+V.Name = "V"
+V.Image = "rbxassetid://90748366421406"
+V.BackgroundTransparency = 1
+V.Size = UDim2.new(0,23,0,21)
+V.Position = UDim2.new(0.63, 0,0.02, 0)
+V.Rotation = 180
+
+
+
+
+
+
 local TextButton = Instance.new("TextButton")
 TextButton.Text = "Execute"
 TextButton.Parent = Shop
@@ -27,10 +58,11 @@ TextButton.Position = UDim2.new(0.105, 0, 0.6, 0)
 TextButton.Font = Enum.Font.LuckiestGuy
 TextButton.TextSize = 18
 TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 
 local CornerForExecute = Instance.new("UICorner")
 CornerForExecute.Parent = TextButton
-CornerForExecute.CornerRadius = UDim.new(0, 20) -- ✅ Corrected to UDim.new()
+CornerForExecute.CornerRadius = UDim.new(0, 13)
 
 
 local TextBox = Instance.new("TextBox")
@@ -40,19 +72,42 @@ TextBox.Size = UDim2.new(0, 113, 0, 31)
 TextBox.Position = UDim2.new(0.105, 0, 0.3, 0)
 TextBox.TextColor3 = Color3.new(1, 1, 1)
 TextBox.Font = Enum.Font.LuckiestGuy
+TextBox.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 
 
 local SpeedText = Instance.new("TextLabel")
-SpeedText.Parent = Shop
-SpeedText.Position = UDim2.new(0.5,0,0.1,0)
+SpeedText.Parent = Frame
+SpeedText.BackgroundTransparency = 1
+SpeedText.Position = UDim2.new(0.171, 0,0.188, 0)
+SpeedText.Size = UDim2.new(0.632, 0,1.133, 0)
 SpeedText.Font = Enum.Font.LuckiestGuy
 SpeedText.TextColor3 = Color3.new(1, 1, 1)
 SpeedText.Text = "SPEED"
-SpeedText.TextSize = 20
+SpeedText.TextSize = 16
+
+X.MouseButton1Click:Connect(function()
+	Frame:Destroy()
+	SpeedText:Destroy()
+	V:Destroy()
+	Shop:Destroy()
+end)
+
+V.MouseButton1Click:Connect(function()
+	Open = not Open
+	print(Open)
+	if not Open then
+
+		Shop.Visible = false
+		V.Rotation = 0
+	else
+		Shop.Visible = true
+		V.Rotation = 180
+	end
+end)
 
 local CornerForTextbox = Instance.new("UICorner")
 CornerForTextbox.Parent = TextBox
-CornerForTextbox.CornerRadius = UDim.new(20,20)
+CornerForTextbox.CornerRadius = UDim.new(0,13)
 
 
 
@@ -63,12 +118,3 @@ TextButton.MouseButton1Click:Connect(function()
 	humanoid.WalkSpeed = Type
 end)
 
-local UiStroke = Instance.new("UIStroke")
-UiStroke.Parent = Shop
-UiStroke.Name = "UIStroke"
-UiStroke.Color = Color3.new(1, 1, 1)
-UiStroke.Thickness = 2
-
-local UiCorner = Instance.new("UICorner")
-UiCorner.Parent = Shop
-UiCorner.CornerRadius = UDim.new(0, 20) -- ✅ UDim should have (0, 20)
