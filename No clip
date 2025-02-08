@@ -47,7 +47,7 @@ SpeedText.Position = UDim2.new(0.171, 0, 0.188, 0)
 SpeedText.Size = UDim2.new(0.632, 0, 1.133, 0)
 SpeedText.Font = Enum.Font.LuckiestGuy
 SpeedText.TextColor3 = Color3.new(1, 1, 1)
-SpeedText.Text = "NO-CLIP MODE"
+SpeedText.Text = "NO COLLISION SCRIPT"
 SpeedText.TextSize = 16
 
 
@@ -99,7 +99,7 @@ V.MouseButton1Click:Connect(function()
 	end
 end)
 
--- NO CLIP FUNCTION
+
 local noClipEnabled = false
 
 local function toggleNoClip(state)
