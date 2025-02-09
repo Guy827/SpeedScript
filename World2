@@ -4,7 +4,7 @@ local char = player.Character or player.CharacterAdded:Wait()
 local humanoid = char:WaitForChild("Humanoid")
 
 -- Target teleport position
-local teleportPosition = Vector3.new(-5517.47705078125, 6207.853515625, 123.29833221435547)
+local teleportPosition = Vector3.new(-5117.47705078125, 6207.853515625, 123.29833221435547)
 
 -- UI Setup
 local ScreenGui = Instance.new("ScreenGui")
