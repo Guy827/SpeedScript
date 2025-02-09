@@ -1,0 +1,105 @@
+-- Local Script
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local Open = true
+
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = playerGui
+ScreenGui.Name = "JumpHeightGUI"
+
+local Shop = Instance.new("Frame")
+Shop.Parent = ScreenGui
+Shop.Name = "Shop"
+Shop.Size = UDim2.new(0, 150, 0, 176)
+Shop.Position = UDim2.new(0.122, 0, 0.166, 0)
+Shop.BackgroundColor3 = Color3.new(0, 0, 0)
+
+local Frame = Instance.new("Frame")
+Frame.Parent = ScreenGui
+Frame.Position = UDim2.new(0.122, 0, 0.074, 0)
+Frame.Size = UDim2.new(0, 150, 0, 53)
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+
+local X = Instance.new("ImageButton")
+X.Parent = Frame
+X.Name = "ExitButton"
+X.Image = "rbxassetid://80811143418939"
+X.BackgroundTransparency = 1
+X.Size = UDim2.new(0, 18, 0, 19)
+X.Position = UDim2.new(0.803, 0, 0.028, 0)
+
+local V = Instance.new("ImageButton")
+V.Parent = Frame
+V.Name = "V"
+V.Image = "rbxassetid://90748366421406"
+V.BackgroundTransparency = 1
+V.Size = UDim2.new(0, 23, 0, 21)
+V.Position = UDim2.new(0.63, 0, 0.02, 0)
+V.Rotation = 180
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Set JumpPower"
+TextButton.Parent = Shop
+TextButton.Size = UDim2.new(0, 113, 0, 31)
+TextButton.Position = UDim2.new(0.135, 0, 0.6, 0)
+TextButton.Font = Enum.Font.LuckiestGuy
+TextButton.TextSize = 11
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+
+local CornerForExecute = Instance.new("UICorner")
+CornerForExecute.Parent = TextButton
+CornerForExecute.CornerRadius = UDim.new(0, 13)
+
+local TextBox = Instance.new("TextBox")
+TextBox.Text = "Enter JumpPower"
+TextBox.Parent = Shop
+TextBox.Size = UDim2.new(0, 113, 0, 31)
+TextBox.Position = UDim2.new(0.135, 0, 0.3, 0)
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.Font = Enum.Font.LuckiestGuy
+TextBox.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+
+local JumpText = Instance.new("TextLabel")
+JumpText.Parent = Frame
+JumpText.BackgroundTransparency = 1
+JumpText.Position = UDim2.new(0.171, 0, 0.188, 0)
+JumpText.Size = UDim2.new(0.632, 0, 1.133, 0)
+JumpText.Font = Enum.Font.LuckiestGuy
+JumpText.TextColor3 = Color3.new(1, 1, 1)
+JumpText.Text = "JUMP HEIGHT"
+JumpText.TextSize = 16
+
+X.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+V.MouseButton1Click:Connect(function()
+    Open = not Open
+    if not Open then
+        Shop.Visible = false
+        V.Rotation = 0
+    else
+        Shop.Visible = true
+        V.Rotation = 180
+    end
+end)
+
+local CornerForTextbox = Instance.new("UICorner")
+CornerForTextbox.Parent = TextBox
+CornerForTextbox.CornerRadius = UDim.new(0, 13)
+
+TextButton.MouseButton1Click:Connect(function()
+    local input = tonumber(TextBox.Text)
+    if input then
+        humanoid.JumpPower = input
+        print("JumpPower set to:", input)
+    else
+        print("Invalid input. Please enter a number.")
+    end
+end)
