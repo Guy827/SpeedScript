@@ -1,0 +1,98 @@
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- UI Setup
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = playerGui
+ScreenGui.Name = "GravityGUI"
+
+local Shop = Instance.new("Frame")
+Shop.Parent = ScreenGui
+Shop.Name = "Shop"
+Shop.Size = UDim2.new(0, 150, 0, 176)
+Shop.Position = UDim2.new(0.122, 0, 0.166, 0)
+Shop.BackgroundColor3 = Color3.new(0, 0, 0)
+
+local Frame = Instance.new("Frame")
+Frame.Parent = ScreenGui
+Frame.Position = UDim2.new(0.122, 0, 0.074, 0)
+Frame.Size = UDim2.new(0, 150, 0, 53)
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+
+local X = Instance.new("ImageButton")
+X.Parent = Frame
+X.Name = "ExitButton"
+X.Image = "rbxassetid://80811143418939"
+X.BackgroundTransparency = 1
+X.Size = UDim2.new(0, 18, 0, 19)
+X.Position = UDim2.new(0.803, 0, 0.028, 0)
+
+local V = Instance.new("ImageButton")
+V.Parent = Frame
+V.Name = "V"
+V.Image = "rbxassetid://90748366421406"
+V.BackgroundTransparency = 1
+V.Size = UDim2.new(0, 23, 0, 21)
+V.Position = UDim2.new(0.63, 0, 0.02, 0)
+V.Rotation = 180
+
+local GravityText = Instance.new("TextLabel")
+GravityText.Parent = Frame
+GravityText.BackgroundTransparency = 1
+GravityText.Position = UDim2.new(0.171, 0, 0.188, 0)
+GravityText.Size = UDim2.new(0.632, 0, 1.133, 0)
+GravityText.Font = Enum.Font.LuckiestGuy
+GravityText.TextColor3 = Color3.new(1, 1, 1)
+GravityText.Text = "GRAVITY"
+GravityText.TextSize = 16
+
+-- Input Box for Gravity Value
+local TextBox = Instance.new("TextBox")
+TextBox.Text = "Enter Gravity"
+TextBox.Parent = Shop
+TextBox.Size = UDim2.new(0, 113, 0, 31)
+TextBox.Position = UDim2.new(0.135, 0, 0.3, 0)
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.Font = Enum.Font.LuckiestGuy
+TextBox.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+
+local CornerForTextbox = Instance.new("UICorner")
+CornerForTextbox.Parent = TextBox
+CornerForTextbox.CornerRadius = UDim.new(0, 13)
+
+-- Button to Apply Gravity
+local ApplyButton = Instance.new("TextButton")
+ApplyButton.Text = "Apply"
+ApplyButton.Parent = Shop
+ApplyButton.Size = UDim2.new(0, 113, 0, 31)
+ApplyButton.Position = UDim2.new(0.135, 0, 0.6, 0)
+ApplyButton.Font = Enum.Font.LuckiestGuy
+ApplyButton.TextSize = 18
+ApplyButton.TextColor3 = Color3.new(1, 1, 1)
+ApplyButton.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+
+local CornerForApplyButton = Instance.new("UICorner")
+CornerForApplyButton.Parent = ApplyButton
+CornerForApplyButton.CornerRadius = UDim.new(0, 13)
+
+-- Exit Button Functionality
+X.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Toggle Shop Visibility
+V.MouseButton1Click:Connect(function()
+    Shop.Visible = not Shop.Visible
+    V.Rotation = Shop.Visible and 180 or 0
+end)
+
+-- Functionality to Apply Gravity
+ApplyButton.MouseButton1Click:Connect(function()
+    local input = tonumber(TextBox.Text)
+    if input then
+        workspace.Gravity = input
+        print("Gravity set to:", input)
+    else
+        print("Invalid input. Please enter a valid number.")
+    end
+end)
